@@ -1,0 +1,33 @@
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.20;
+
+contract BasicMath {
+    // a + b, overflow olursa (s < a) => (0, true)
+    function adder(uint256 a, uint256 b)
+        external
+        pure
+        returns (uint256 result, bool error)
+    {
+        unchecked {
+            uint256 s = a + b;
+            if (s < a) {
+                return (0, true);
+            }
+            return (s, false);
+        }
+    }
+
+    // a - b, underflow olursa (a < b) => (0, true)
+    function subtractor(uint256 a, uint256 b)
+        external
+        pure
+        returns (uint256 result, bool error)
+    {
+        unchecked {
+            if (a < b) {
+                return (0, true);
+            }
+            return (a - b, false);
+        }
+    }
+}
